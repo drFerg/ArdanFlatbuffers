@@ -1,8 +1,9 @@
 namespace UnrealCoojaMsg;
 
 
-enum MsgType : byte { LED = 1, LOCATION, RADIO, PIR, PAUSE, RESUME, SPEED_NORM,
-                      SPEED_SLOW, SPEED_FAST, RADIO_DUTY, FIRE, TEMP, SMOKE }
+enum MsgType : byte { SIMSTATE = 1, LED, LOCATION, RADIO, RADIO_STATE, RADIO_DUTY, BUTTON, PIR, FIRE, TEMP, SMOKE }
+
+enum SimState : byte { PAUSE, NORMAL, SLOW, DOUBLE, TRIPLE }
 
 struct Vec3 {
   x:float;
@@ -17,13 +18,21 @@ struct RadioDuty {
   radioInterferedRatio:double;
 }
 
+struct RadioState{
+  radioOn:bool;
+  signalStrength:double;
+  outputPower:double;
+}
+
 table Message {
-  id:int;
   type:int;
+  simState:int;
+  id:int;
   location:Vec3;
   node:[RadioDuty];
   rcvd:[int];
   led:[int];
+  radioState:RadioState;
 }
 
 
