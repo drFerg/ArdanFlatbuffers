@@ -1,9 +1,9 @@
 namespace UnrealCoojaMsg;
 
 
-enum MsgType : byte { SIMSTATE = 1, LED, LOCATION, RADIO, RADIO_STATE, RADIO_DUTY, BUTTON, PIR, FIRE, TEMP, SMOKE }
+enum MsgType : byte { SIMSTATE = 1, LED, BEEPER, LOCATION, RADIO, RADIO_STATE, RADIO_DUTY, BUTTON, PIR, FIRE, TEMP, SMOKE }
 
-enum SimState : byte { PAUSE, NORMAL, SLOW, DOUBLE, TRIPLE }
+enum SimState : byte { PAUSE, RESUME, NORMAL, SLOW, DOUBLE, TRIPLE }
 
 struct Vec3 {
   x:float;

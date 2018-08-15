@@ -5,12 +5,13 @@ package UnrealCoojaMsg;
 public final class SimState {
   private SimState() { }
   public static final byte PAUSE = 0;
-  public static final byte NORMAL = 1;
-  public static final byte SLOW = 2;
-  public static final byte DOUBLE = 3;
-  public static final byte TRIPLE = 4;
+  public static final byte RESUME = 1;
+  public static final byte NORMAL = 2;
+  public static final byte SLOW = 3;
+  public static final byte DOUBLE = 4;
+  public static final byte TRIPLE = 5;
 
-  public static final String[] names = { "PAUSE", "NORMAL", "SLOW", "DOUBLE", "TRIPLE", };
+  public static final String[] names = { "PAUSE", "RESUME", "NORMAL", "SLOW", "DOUBLE", "TRIPLE", };
 
   public static String name(int e) { return names[e]; }
 }

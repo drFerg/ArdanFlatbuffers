@@ -19,15 +19,16 @@ struct Message;
 enum MsgType {
   MsgType_SIMSTATE = 1,
   MsgType_LED = 2,
-  MsgType_LOCATION = 3,
-  MsgType_RADIO = 4,
-  MsgType_RADIO_STATE = 5,
-  MsgType_RADIO_DUTY = 6,
-  MsgType_BUTTON = 7,
-  MsgType_PIR = 8,
-  MsgType_FIRE = 9,
-  MsgType_TEMP = 10,
-  MsgType_SMOKE = 11,
+  MsgType_BEEPER = 3,
+  MsgType_LOCATION = 4,
+  MsgType_RADIO = 5,
+  MsgType_RADIO_STATE = 6,
+  MsgType_RADIO_DUTY = 7,
+  MsgType_BUTTON = 8,
+  MsgType_PIR = 9,
+  MsgType_FIRE = 10,
+  MsgType_TEMP = 11,
+  MsgType_SMOKE = 12,
   MsgType_MIN = MsgType_SIMSTATE,
   MsgType_MAX = MsgType_SMOKE
 };
@@ -36,6 +37,7 @@ inline const char **EnumNamesMsgType() {
   static const char *names[] = {
     "SIMSTATE",
     "LED",
+    "BEEPER",
     "LOCATION",
     "RADIO",
     "RADIO_STATE",
@@ -57,10 +59,11 @@ inline const char *EnumNameMsgType(MsgType e) {
 
 enum SimState {
   SimState_PAUSE = 0,
-  SimState_NORMAL = 1,
-  SimState_SLOW = 2,
-  SimState_DOUBLE = 3,
-  SimState_TRIPLE = 4,
+  SimState_RESUME = 1,
+  SimState_NORMAL = 2,
+  SimState_SLOW = 3,
+  SimState_DOUBLE = 4,
+  SimState_TRIPLE = 5,
   SimState_MIN = SimState_PAUSE,
   SimState_MAX = SimState_TRIPLE
 };
@@ -68,6 +71,7 @@ enum SimState {
 inline const char **EnumNamesSimState() {
   static const char *names[] = {
     "PAUSE",
+    "RESUME",
     "NORMAL",
     "SLOW",
     "DOUBLE",

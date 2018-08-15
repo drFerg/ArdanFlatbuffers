@@ -6,17 +6,18 @@ public final class MsgType {
   private MsgType() { }
   public static final byte SIMSTATE = 1;
   public static final byte LED = 2;
-  public static final byte LOCATION = 3;
-  public static final byte RADIO = 4;
-  public static final byte RADIO_STATE = 5;
-  public static final byte RADIO_DUTY = 6;
-  public static final byte BUTTON = 7;
-  public static final byte PIR = 8;
-  public static final byte FIRE = 9;
-  public static final byte TEMP = 10;
-  public static final byte SMOKE = 11;
+  public static final byte BEEPER = 3;
+  public static final byte LOCATION = 4;
+  public static final byte RADIO = 5;
+  public static final byte RADIO_STATE = 6;
+  public static final byte RADIO_DUTY = 7;
+  public static final byte BUTTON = 8;
+  public static final byte PIR = 9;
+  public static final byte FIRE = 10;
+  public static final byte TEMP = 11;
+  public static final byte SMOKE = 12;
 
-  public static final String[] names = { "SIMSTATE", "LED", "LOCATION", "RADIO", "RADIO_STATE", "RADIO_DUTY", "BUTTON", "PIR", "FIRE", "TEMP", "SMOKE", };
+  public static final String[] names = { "SIMSTATE", "LED", "BEEPER", "LOCATION", "RADIO", "RADIO_STATE", "RADIO_DUTY", "BUTTON", "PIR", "FIRE", "TEMP", "SMOKE", };
 
   public static String name(int e) { return names[e - SIMSTATE]; }
 }
