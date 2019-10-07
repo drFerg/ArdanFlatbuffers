@@ -1,7 +1,7 @@
 namespace UnrealCoojaMsg;
 
 
-enum MsgType : byte { SIMSTATE = 1, LED, BEEPER, LOCATION, RADIO, RADIO_STATE, RADIO_DUTY, BUTTON, PIR, FIRE, TEMP, SMOKE }
+enum MsgType : byte { SIMSTATE = 1, LED, BEEPER, LOCATION, RADIO, RADIO_STATE, RADIO_DUTY, BUTTON, PIR, FIRE, TEMP, SMOKE, TARGET}
 
 enum SimState : byte { PAUSE, RESUME, NORMAL, SLOW, DOUBLE, TRIPLE }
 
@@ -33,6 +33,7 @@ table Message {
   rcvd:[int];
   led:[int];
   radioState:RadioState;
+  target: int;
 }
 
 

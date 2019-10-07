@@ -29,8 +29,9 @@ enum MsgType {
   MsgType_FIRE = 10,
   MsgType_TEMP = 11,
   MsgType_SMOKE = 12,
+  MsgType_TARGET = 13,
   MsgType_MIN = MsgType_SIMSTATE,
-  MsgType_MAX = MsgType_SMOKE
+  MsgType_MAX = MsgType_TARGET
 };
 
 inline const char **EnumNamesMsgType() {
@@ -47,6 +48,7 @@ inline const char **EnumNamesMsgType() {
     "FIRE",
     "TEMP",
     "SMOKE",
+    "TARGET",
     nullptr
   };
   return names;
@@ -195,7 +197,8 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
     VT_NODE = 12,
     VT_RCVD = 14,
     VT_LED = 16,
-    VT_RADIOSTATE = 18
+    VT_RADIOSTATE = 18,
+    VT_TARGET = 20
   };
   int32_t type() const {
     return GetField<int32_t>(VT_TYPE, 0);
@@ -221,6 +224,9 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const RadioState *radioState() const {
     return GetStruct<const RadioState *>(VT_RADIOSTATE);
   }
+  int32_t target() const {
+    return GetField<int32_t>(VT_TARGET, 0);
+  }
   bool Verify(flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyField<int32_t>(verifier, VT_TYPE) &&
@@ -234,6 +240,7 @@ struct Message FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
            VerifyOffset(verifier, VT_LED) &&
            verifier.Verify(led()) &&
            VerifyField<RadioState>(verifier, VT_RADIOSTATE) &&
+           VerifyField<int32_t>(verifier, VT_TARGET) &&
            verifier.EndTable();
   }
 };
@@ -265,13 +272,16 @@ struct MessageBuilder {
   void add_radioState(const RadioState *radioState) {
     fbb_.AddStruct(Message::VT_RADIOSTATE, radioState);
   }
+  void add_target(int32_t target) {
+    fbb_.AddElement<int32_t>(Message::VT_TARGET, target, 0);
+  }
   MessageBuilder(flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
   MessageBuilder &operator=(const MessageBuilder &);
   flatbuffers::Offset<Message> Finish() {
-    const auto end = fbb_.EndTable(start_, 8);
+    const auto end = fbb_.EndTable(start_, 9);
     auto o = flatbuffers::Offset<Message>(end);
     return o;
   }
@@ -286,8 +296,10 @@ inline flatbuffers::Offset<Message> CreateMessage(
     flatbuffers::Offset<flatbuffers::Vector<const RadioDuty *>> node = 0,
     flatbuffers::Offset<flatbuffers::Vector<int32_t>> rcvd = 0,
     flatbuffers::Offset<flatbuffers::Vector<int32_t>> led = 0,
-    const RadioState *radioState = 0) {
+    const RadioState *radioState = 0,
+    int32_t target = 0) {
   MessageBuilder builder_(_fbb);
+  builder_.add_target(target);
   builder_.add_radioState(radioState);
   builder_.add_led(led);
   builder_.add_rcvd(rcvd);
@@ -308,7 +320,8 @@ inline flatbuffers::Offset<Message> CreateMessageDirect(
     const std::vector<const RadioDuty *> *node = nullptr,
     const std::vector<int32_t> *rcvd = nullptr,
     const std::vector<int32_t> *led = nullptr,
-    const RadioState *radioState = 0) {
+    const RadioState *radioState = 0,
+    int32_t target = 0) {
   return UnrealCoojaMsg::CreateMessage(
       _fbb,
       type,
@@ -318,7 +331,8 @@ inline flatbuffers::Offset<Message> CreateMessageDirect(
       node ? _fbb.CreateVector<const RadioDuty *>(*node) : 0,
       rcvd ? _fbb.CreateVector<int32_t>(*rcvd) : 0,
       led ? _fbb.CreateVector<int32_t>(*led) : 0,
-      radioState);
+      radioState,
+      target);
 }
 
 inline const UnrealCoojaMsg::Message *GetMessage(const void *buf) {
