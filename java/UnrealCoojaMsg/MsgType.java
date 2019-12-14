@@ -17,8 +17,9 @@ public final class MsgType {
   public static final byte TEMP = 11;
   public static final byte SMOKE = 12;
   public static final byte TARGET = 13;
+  public static final byte TSTAMP = 14;
 
-  public static final String[] names = { "SIMSTATE", "LED", "BEEPER", "LOCATION", "RADIO", "RADIO_STATE", "RADIO_DUTY", "BUTTON", "PIR", "FIRE", "TEMP", "SMOKE", "TARGET", };
+  public static final String[] names = { "SIMSTATE", "LED", "BEEPER", "LOCATION", "RADIO", "RADIO_STATE", "RADIO_DUTY", "BUTTON", "PIR", "FIRE", "TEMP", "SMOKE", "TARGET", "TSTAMP", };
 
   public static String name(int e) { return names[e - SIMSTATE]; }
 }

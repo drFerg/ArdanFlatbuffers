@@ -31,8 +31,9 @@ public final class Message extends Table {
   public RadioState radioState() { return radioState(new RadioState()); }
   public RadioState radioState(RadioState obj) { int o = __offset(18); return o != 0 ? obj.__assign(o + bb_pos, bb) : null; }
   public int target() { int o = __offset(20); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public long tstamp() { int o = __offset(22); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
 
-  public static void startMessage(FlatBufferBuilder builder) { builder.startObject(9); }
+  public static void startMessage(FlatBufferBuilder builder) { builder.startObject(10); }
   public static void addType(FlatBufferBuilder builder, int type) { builder.addInt(0, type, 0); }
   public static void addSimState(FlatBufferBuilder builder, int simState) { builder.addInt(1, simState, 0); }
   public static void addId(FlatBufferBuilder builder, int id) { builder.addInt(2, id, 0); }
@@ -47,6 +48,7 @@ public final class Message extends Table {
   public static void startLedVector(FlatBufferBuilder builder, int numElems) { builder.startVector(4, numElems, 4); }
   public static void addRadioState(FlatBufferBuilder builder, int radioStateOffset) { builder.addStruct(7, radioStateOffset, 0); }
   public static void addTarget(FlatBufferBuilder builder, int target) { builder.addInt(8, target, 0); }
+  public static void addTstamp(FlatBufferBuilder builder, long tstamp) { builder.addLong(9, tstamp, 0L); }
   public static int endMessage(FlatBufferBuilder builder) {
     int o = builder.endObject();
     return o;
